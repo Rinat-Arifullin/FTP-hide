@@ -21,8 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "pre-commit": "lint-staged",
-    "eslint": "node ./node_modules/eslint/bin/eslint.js ./src --ext .ts,.tsx --cache --ignore-pattern *.d.ts --config ./.eslintrc --fix"
+    "pre-commit": "lint-staged"
   },
   "husky": {
     "hooks": {
