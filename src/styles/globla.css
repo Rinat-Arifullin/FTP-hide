@@ -1,0 +1,48 @@
+:root {
+    --black: #010109;
+    --primary: #7F4EFF;
+    --success: #32E3AF;
+    --white: #FFFFFF;
+    --gray: #27293A;
+}
+
+body {
+    background: var(--black);
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    src: local('Tajawal Bold'), local('Tajawal-Bold'),
+    url('../static/fonts/Tajawal-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins Regular'), local('Poppins-Regular'),
+    url('../static/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins ExtraLight'), local('Poppins-ExtraLight'),
+    url('../static/fonts/Poppins-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
+    url('../static/fonts/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* TODO почитать про подключение стилей */

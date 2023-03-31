@@ -1,0 +1,50 @@
+.wrapper {
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  width: 250px;
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  overflow: hidden;
+
+&.withValue {
+border: 1px solid var(--primary);
+}
+
+.icons {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.closeIcon {
+transition: .3s;
+&.hide {
+  opacity: 0;
+}
+}
+
+.arrow {
+transition: .3s;
+will-change: transform;
+  margin-top: 3px;
+&.arrowDown {
+  transform: rotateZ(90deg);
+}
+}
+
+.header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+cursor: pointer;
+:global(p){
+  margin: 0;
+}
+}
+.options {
+padding-top: 1px;
+transition: .3s;
+}
+}

@@ -1,0 +1,39 @@
+.wrapper {
+  max-width: 500px;
+  display: flex;
+  width: 100%;
+
+  .iconWrapper {
+    position: relative;
+    :global(svg){
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.input {
+  border: 1px solid var(--white);
+  &:focus {
+    border: 1px solid var(--primary);
+  }
+  border-radius: 25px;
+  padding: 12px 20px;
+  transition: .3s;
+  width: 100%;
+  &.search {
+    padding-left: 40px;
+  }
+  background: transparent;
+  outline: none;
+  color: white;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 110%;
+}
+

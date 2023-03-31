@@ -1,0 +1,13 @@
+@import 'src/styles/mixins';
+
+.wrapper {
+  @include container();
+  .header {
+    padding: 1rem 0;
+  }
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,26 @@
+.text {
+  font-family: 'Poppins';
+  font-style: normal;
+  line-height: 110%;
+  letter-spacing: 1px;
+  color: var(--white);
+
+  &.pointer {
+    cursor: pointer;
+  }
+
+  &.normal {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &.thin {
+    font-weight: 200;
+    font-size: 16px;
+  }
+
+  &.bold {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}

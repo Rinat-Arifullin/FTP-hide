@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  .imgWrapper {
+    height: 400px;
+    transition: .3s ease;
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+
+    :global(img){
+
+      width: auto;
+      height: 400px;
+    }
+  }
+  .active {
+    flex-grow: 20;
+  }
+
+}

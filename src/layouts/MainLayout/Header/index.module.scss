@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    :global(p:hover, svg:hover){
+      color: var(--primary);
+      stroke: var(--primary)
+    }
+  }
+}

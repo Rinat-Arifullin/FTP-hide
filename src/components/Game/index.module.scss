@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  .infoText {
+    width: 250px;
+    text-align: left;
+  }
+}
+
+.flex {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+.slider {
+  width: 50vw;
+}

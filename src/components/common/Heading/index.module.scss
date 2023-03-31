@@ -1,0 +1,20 @@
+.heading {
+  font-family: 'Tajawal';
+  font-style: normal;
+  color: var(--white);
+
+  &.h1 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 110%;
+  }
+
+  &.h2 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 110%;
+  }
+  &.pointer {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  gap: 2rem;
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 450px;
+  }
+  .avatar {
+    background: var(--gray);
+    border-radius: 15px;
+    min-width: 200px;
+  }
+}

@@ -1,0 +1,38 @@
+.wrapper {
+  background: var(--gray);
+  width: fit-content;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  transition: .3s;
+
+  &:hover {
+    border: 1px solid var(--primary);
+  }
+
+  .text {
+    padding: 0;
+    margin: 0;
+  }
+
+  .imgWrapper {
+    width: 230px;
+    border-radius: 25px;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    :global(img) {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+}
