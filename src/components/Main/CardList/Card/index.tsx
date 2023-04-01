@@ -1,8 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 import Text from "components/common/Text";
 import Button from "components/common/Button";
 
 import cx from "./index.module.scss";
-import { useNavigate } from "react-router-dom";
 
 import LikeIcon from "static/icons/likeIcon";
 import ArrowIcon from "static/icons/ArrowIcon";

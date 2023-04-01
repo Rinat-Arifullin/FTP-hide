@@ -11,10 +11,10 @@ const SelectArrow = () => {
         <path
           d="M6 14L12 8L6 2"
           stroke="white"
-          stroke-width="2"
-          stroke-linecap="square"
-          stroke-linejoin="round"
-          shape-rendering="crispEdges"
+          strokeWidth="2"
+          strokeLinecap="square"
+          strokeLinejoin="round"
+          shapeRendering="crispEdges"
         />
       </g>
       <defs>
@@ -25,9 +25,9 @@ const SelectArrow = () => {
           width="16.4142"
           height="22.8284"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

@@ -9,16 +9,16 @@ const CloseIcon = () => (
     <path
       d="M1 1.5L21 21.5"
       stroke="white"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21 1.5L1 21.5"
       stroke="white"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
