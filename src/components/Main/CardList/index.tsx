@@ -18,40 +18,6 @@ const CardList = ({ dataSource }: IProps) => {
         {dataSource.map((card) => (
           <Card key={card.id} {...card} />
         ))}
-        <Card
-          id={1}
-          imgUrl={"https://www.freetogame.com/g/517/thumbnail.jpg"}
-          title={"Lost Ark"}
-          subTitle={"Amazon Games"}
-          onLike={onLike}
-        />
-        <Card
-          id={1}
-          imgUrl={"https://www.freetogame.com/g/517/thumbnail.jpg"}
-          title={"Lost Ark"}
-          subTitle={"Amazon Games"}
-          onLike={onLike}
-        />
-        <Card
-          id={1}
-          imgUrl={"https://www.freetogame.com/g/517/thumbnail.jpg"}
-          title={"Lost Ark"}
-          subTitle={"Amazon Games"}
-          onLike={onLike}
-        />
-        <Card
-          id={1}
-          imgUrl={"https://www.freetogame.com/g/517/thumbnail.jpg"}
-          title={"Lost Ark"}
-          subTitle={"Amazon Games"}
-          onLike={onLike}
-        />
-        <Card
-          id={1}
-          imgUrl={"https://www.freetogame.com/g/517/thumbnail.jpg"}
-          title={"Lost Ark"}
-          subTitle={"Amazon Games"}
-        />
       </div>
     </div>
   );

@@ -1,20 +1,28 @@
+@import 'src/styles/mixins';
+
 .wrapper {
-  background: var(--gray);
   width: fit-content;
   padding: 20px;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 0;
   box-sizing: border-box;
   border: 1px solid transparent;
+  border-bottom: 1px solid var(--gray);
   transition: .3s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &:hover {
     border: 1px solid var(--primary);
+    border-radius: 25px;
   }
 
   .text {
     padding: 0;
-    margin: 0;
+    max-width: 200px;
+    margin-bottom: 10px;
   }
 
   .imgWrapper {

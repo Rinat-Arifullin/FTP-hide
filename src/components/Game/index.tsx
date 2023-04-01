@@ -9,7 +9,40 @@ import ArrowIcon from "static/icons/ArrowIcon";
 import LikeIcon from "static/icons/likeIcon";
 
 import cx from "./index.module.scss";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import axios from "axios";
 
+export interface IGameDetail {
+  id: number;
+  title: string;
+  thumbnail: string;
+  status: string;
+  short_description: string;
+  description: string;
+  game_url: string;
+  genre: string;
+  platform: string;
+  publisher: string;
+  developer: string;
+  release_date: string;
+  freetogame_profile_url: string;
+  minimum_system_requirements: MinimumSystemRequirements;
+  screenshots: Screenshot[];
+}
+
+export interface MinimumSystemRequirements {
+  os: string;
+  processor: string;
+  memory: string;
+  graphics: string;
+  storage: string;
+}
+
+export interface Screenshot {
+  id: number;
+  image: string;
+}
 const imgaes: string[] = [
   "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg",
   "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg",

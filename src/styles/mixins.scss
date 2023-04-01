@@ -2,4 +2,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 2rem;
+};
+
+@mixin randomBgr {
+  background: rgb(random(100), random(100), random(100));
 }
