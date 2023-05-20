@@ -2,142 +2,99 @@ import Slider from "components/common/Slider";
 import Heading from "components/common/Heading";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
-import GamesSmallList from "components/GamesSmallList";
-import { IGameSmallItem } from "components/GamesSmallList/models";
+import SmallCardList from "components/SmallCardList";
+import Loader from "components/common/Loader";
+
+import MinSysReq from "./MinSysReq";
 
 import ArrowIcon from "static/icons/ArrowIcon";
 import LikeIcon from "static/icons/likeIcon";
 
+import { gameApi } from "service/game/service";
+import { ECategory } from "service/game/types";
+import { likedGameApi } from "service/likes/service";
+
+import { useAppDispatch } from "store/hooks/redux";
+
 import cx from "./index.module.scss";
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import axios from "axios";
-
-export interface IGameDetail {
-  id: number;
-  title: string;
-  thumbnail: string;
-  status: string;
-  short_description: string;
-  description: string;
-  game_url: string;
-  genre: string;
-  platform: string;
-  publisher: string;
-  developer: string;
-  release_date: string;
-  freetogame_profile_url: string;
-  minimum_system_requirements: MinimumSystemRequirements;
-  screenshots: Screenshot[];
-}
-
-export interface MinimumSystemRequirements {
-  os: string;
-  processor: string;
-  memory: string;
-  graphics: string;
-  storage: string;
-}
-
-export interface Screenshot {
-  id: number;
-  image: string;
-}
-const imgaes: string[] = [
-  "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg",
-  "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-2.jpg",
-  "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-3.jpg",
-  "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg",
-];
-
-const mockData: IGameSmallItem[] = [];
-
-for (let i = 0; i < 30; i++) {
-  mockData.push({
-    id: i,
-    num: i,
-    img: "https://www.freetogame.com/g/452/Call-of-Duty-Warzone-4.jpg",
-    title: "War Zone",
-    subTitle: "sub title",
-  });
-}
+import { useRouter } from "hooks/useRouter";
+import { addNotification } from "../../store/notifications/slice";
+import { ENotificationType } from "../common/Notification";
 
 const GameLayout = () => {
+  const dispatch = useAppDispatch();
+  const { params } = useRouter();
+
+  const {
+    data: gameDetailData,
+    isLoading,
+    error,
+  } = gameApi.useFetchGameDetailQuery({ id: params.id as string });
+
+  const {
+    data: gameList,
+    isLoading: isLoadingGameList,
+    error: errorGameList,
+  } = gameApi.useFetchGameListQuery({
+    filters: { category: gameDetailData?.genre.toLowerCase() as ECategory },
+  });
+
+  const [likeGame] = likedGameApi.useLikeGameMutation();
+
+  const goToInstall = () => {
+    if (gameDetailData?.game_url) {
+      window.location.href = gameDetailData.game_url;
+    }
+  };
+
+  const onLike = async () => {
+    if (gameDetailData) {
+      await likeGame(gameDetailData);
+      dispatch(
+        addNotification({
+          type: ENotificationType.Success,
+          text: gameDetailData.title + " liked!",
+        })
+      );
+    }
+  };
+
+  if (isLoading || !gameDetailData) {
+    return <Loader />;
+  }
+
   return (
     <div className={cx.wrapper}>
       <div className={cx.flex}>
         <div className={cx.slider}>
-          <Slider images={imgaes} />
+          <Slider screenshots={gameDetailData?.screenshots} />
         </div>
         <div>
           <div className={cx.flex}>
-            <Heading>Call Of Duty: Warzone</Heading>
-            <Button>
+            <Heading>{gameDetailData.title}</Heading>
+            <Button className={cx.link} onClick={goToInstall}>
               install <ArrowIcon />
             </Button>
-            <Button shape="circle" theme="success">
+            <Button shape="circle" theme="success" onClick={onLike}>
               <LikeIcon />
             </Button>
           </div>
-          <Heading tag="h2">Minimum system requirements</Heading>
-          <div className={cx.row}>
-            <Text size="thin">Storage</Text>
-            <Text size="bold" className={cx.infoText}>
-              175GB HD space
-            </Text>
-          </div>
-          <div className={cx.row}>
-            <Text size="thin">Graphics</Text>
-            <Text size="bold" className={cx.infoText}>
-              NVIDIA GeForce GTX 670 / GeForce GTX 1650 or Radeon HD 7950
-            </Text>
-          </div>
-          <div className={cx.row}>
-            <Text size="thin">Memory</Text>
-            <Text size="bold" className={cx.infoText}>
-              8GB RAM
-            </Text>
-          </div>
-          <div className={cx.row}>
-            <Text size="thin">Processor</Text>
-            <Text size="bold" className={cx.infoText}>
-              Intel Core i3-4340 or AMD FX-6300
-            </Text>
-          </div>
-          <div className={cx.row}>
-            <Text size="thin">OS</Text>
-            <Text size="bold" className={cx.infoText}>
-              Windows 7 64-Bit (SP1) or Windows 10 64-Bit
-            </Text>
-          </div>
+
+          <MinSysReq {...gameDetailData.minimum_system_requirements} />
         </div>
       </div>
 
       <div>
         <Heading>Description</Heading>
-        <Text>
-          Call of Duty: Warzone is both a standalone free-to-play battle royale
-          and modes accessible via Call of Duty: Modern Warfare. Warzone
-          features two modes — the general 150-player battle royle, and
-          “Plunder”. The latter mode is described as a “race to deposit the most
-          Cash”. In both modes players can both earn and loot cash to be used
-          when purchasing in-match equipment, field upgrades, and more. Both
-          cash and XP are earned in a variety of ways, including completing
-          contracts. An interesting feature of the game is one that allows
-          players who have been killed in a match to rejoin it by winning a 1v1
-          match against other felled players in the Gulag. Of course, being a
-          battle royale, the game does offer a battle pass. The pass offers
-          players new weapons, playable characters, Call of Duty points,
-          blueprints, and more. Players can also earn plenty of new items by
-          completing objectives offered with the pass.
-        </Text>
+        <Text>{gameDetailData.short_description}</Text>
       </div>
-
-      <GamesSmallList
-        title={"Recommendation"}
-        dataSource={mockData}
-        loading={false}
-      />
+      {!errorGameList && (
+        <SmallCardList
+          title={"Recommendation"}
+          dataSource={gameList || []}
+          loading={isLoadingGameList}
+        />
+      )}
     </div>
   );
 };

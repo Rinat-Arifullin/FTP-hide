@@ -8,7 +8,7 @@ interface IProps
     HTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  theme?: "primary" | "success";
+  theme?: "primary" | "success" | "danger";
   shape?: "circle" | "default";
 }
 

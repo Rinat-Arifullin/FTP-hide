@@ -38,8 +38,10 @@
 
   .cardList {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 350px);
     justify-items: center;
+    justify-content: center;
     row-gap: 2rem;
     width: 90%;
     height: 100%;
@@ -49,6 +51,7 @@
     &::-webkit-scrollbar {
       width: 3px;
     }
+
     &::-webkit-scrollbar-track {
       background-color: #262626;
     }

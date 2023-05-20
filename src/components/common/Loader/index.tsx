@@ -1,11 +1,13 @@
 import React from "react";
 
-import Heading from "components/common/Heading";
+import LoaderIcon from "static/icons/LoaderIcon";
+
+import cx from "./index.module.scss";
 
 const Loader = () => {
   return (
-    <div>
-      <Heading>Loader...</Heading>
+    <div className={cx.wrapper}>
+      <LoaderIcon />
     </div>
   );
 };

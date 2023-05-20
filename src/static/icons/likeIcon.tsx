@@ -1,9 +1,13 @@
-const LikeIcon = () => (
+interface IProps {
+  liked?: boolean;
+}
+
+const LikeIcon = ({ liked = false }: IProps) => (
   <svg
     width="18"
     height="18"
     viewBox="0 0 18 18"
-    fill="none"
+    fill={liked ? "white" : "transparent"}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

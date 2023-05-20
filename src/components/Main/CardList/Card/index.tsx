@@ -1,61 +1,73 @@
-import { useNavigate } from "react-router-dom";
-
 import Text from "components/common/Text";
 import Button from "components/common/Button";
 
-import cx from "./index.module.scss";
+import { IGamesItemAPI } from "service/game/types";
+
+import { useRouter } from "hooks/useRouter";
 
 import LikeIcon from "static/icons/likeIcon";
 import ArrowIcon from "static/icons/ArrowIcon";
+import TrashIcon from "static/icons/TrashIcon";
 
-export interface ICardProps {
-  id: string | number;
-  imgUrl: string;
-  title: string;
-  subTitle: string;
-  onLike?: (id: ICardProps["id"]) => void;
-  onInstall?: (id: ICardProps["id"]) => void;
+import cx from "./index.module.scss";
+
+export interface ICardProps extends IGamesItemAPI {
+  isLiked?: boolean;
+  onLike?: (id: IGamesItemAPI & { isLiked?: boolean }) => void;
+  onInstall?: (id: ICardProps["game_url"]) => void;
 }
 
 const Card = ({
   id,
-  imgUrl,
+  game_url,
+  thumbnail,
+  genre,
   title,
-  subTitle,
   onLike,
   onInstall,
+  isLiked,
+  ...rest
 }: ICardProps) => {
-  const navigation = useNavigate();
+  const { navigate } = useRouter();
 
   const goToGame = () => {
-    navigation("/game/" + id);
+    navigate("/game/" + id);
   };
 
   return (
     <div className={cx.wrapper} onClick={goToGame}>
       <div className={cx.imgWrapper}>
-        <img src={imgUrl} alt="img" />
+        <img src={thumbnail} alt="img" />
       </div>
       <Text className={cx.text}>{title}</Text>
       <Text size="thin" className={cx.text}>
-        {subTitle}
+        {genre}
       </Text>
       <div className={cx.footer}>
         <Button
-          theme="success"
+          theme={isLiked ? "danger" : "success"}
           shape="circle"
           onClick={(e) => {
             e.stopPropagation();
-            onLike && onLike(id);
+            onLike &&
+              onLike({
+                id,
+                game_url,
+                thumbnail,
+                genre,
+                title,
+                isLiked,
+                ...rest,
+              });
           }}
         >
-          <LikeIcon />
+          {isLiked ? <TrashIcon /> : <LikeIcon />}
         </Button>
         <Button
           shape="circle"
           onClick={(e) => {
             e.stopPropagation();
-            onInstall && onInstall(id);
+            onInstall && onInstall(game_url);
           }}
         >
           <ArrowIcon />

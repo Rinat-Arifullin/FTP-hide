@@ -1,0 +1,31 @@
+@import "src/styles/mixins.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-radius: 15px;
+  padding: 15px 25px;
+  max-width: 350px;
+  height: fit-content;
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  gap: 2rem;
+  z-index: 999;
+  @include fadeIn();
+
+  :global(p){
+    margin:0;
+  }
+
+  &.default{
+    background-color: var(--gray);
+  }
+  &.success{
+    background-color: var(--primary);
+  }
+  &.error {
+    background-color: var(--danger);
+  }
+}

@@ -1,77 +1,56 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
-import GamesSmallList from "components/GamesSmallList";
-import { IGameSmallItem } from "components/GamesSmallList/models";
+import SmallCardList from "components/SmallCardList";
 import Heading from "components/common/Heading";
-
-import { getGamesListRequest } from "network/gameDetail";
-
+import { ENotificationType } from "components/common/Notification";
 import CardList from "./CardList";
-import { ICardProps } from "./CardList/Card";
-import Loader from "../common/Loader";
 
-const mockDataSource: IGameSmallItem[] = [];
-const cardList: ICardProps[] = [];
+import { useAppDispatch } from "store/hooks/redux";
+import { addNotification } from "store/notifications/slice";
 
-for (let i = 0; i < 20; i += 1) {
-  cardList.push({
-    id: i,
-    imgUrl: "https://www.freetogame.com/g/517/thumbnail.jpg",
-    title: "Lost Ark",
-    subTitle: "Amazon Games",
-  });
-}
+import { FilterContext, IFiltersContext } from "./context";
 
-for (let i = 0; i < 20; i += 1) {
-  mockDataSource.push({
-    id: i,
-    num: i,
-    title: "title " + i,
-    subTitle: "sub title " + i,
-    img: "https://www.freetogame.com/g/452/thumbnail.jpg",
-  });
-}
+import { gameApi } from "service/game/service";
+import { IFilters } from "service/game/types";
 
 const Main = () => {
-  const [cardList, setCardList] = useState<{
-    dataSource: ICardProps[];
-    loading: boolean;
-  }>({
-    loading: true,
-    dataSource: [],
-  });
+  const dispatch = useAppDispatch();
+  const [filters, setFilters] = useState<IFilters | null>(null);
+  const { data, isLoading, error } = gameApi.useFetchGameListQuery({ filters });
+  const {
+    data: smallList,
+    isLoading: isLoadingSmallList,
+    error: errorSmallList,
+  } = gameApi.useFetchGameListQuery({ filters: null });
 
-  useEffect(() => {
-    getGamesListRequest()
-      .then((data) => {
-        setCardList({
-          loading: false,
-          dataSource: data,
-        });
+  const filterContextValue: IFiltersContext = useMemo(() => {
+    return {
+      filters,
+      setFilters,
+    };
+  }, [filters]);
+
+  if (error || errorSmallList) {
+    dispatch(
+      addNotification({
+        type: ENotificationType.Error,
+        text: "Something went wrong",
       })
-      .finally(() => {
-        setCardList((state) => {
-          return {
-            ...state,
-            loading: false,
-          };
-        });
-      });
-  }, []);
+    );
+    return null;
+  }
 
   return (
     <div>
-      <GamesSmallList
+      <SmallCardList
         title="Games"
-        dataSource={mockDataSource}
-        loading={false}
+        dataSource={smallList || []}
+        loading={isLoadingSmallList}
       />
       <Heading>Explore</Heading>
-      {cardList.loading ? (
-        <Loader />
-      ) : (
-        <CardList dataSource={cardList.dataSource} />
-      )}
+      <FilterContext.Provider value={filterContextValue}>
+        <CardList dataSource={data || []} isLoading={isLoading} />
+      </FilterContext.Provider>
     </div>
   );
 };

@@ -20,6 +20,10 @@
     background: var(--success);
   }
 
+  &.danger {
+    background: var(--danger);
+  }
+
   // TODO replace mixin
 
   font-family: 'Poppins';

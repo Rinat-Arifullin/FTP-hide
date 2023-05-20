@@ -1,26 +1,28 @@
 import { useState } from "react";
 import classNames from "classnames";
 
+import { Screenshot } from "service/game/types";
+
 import cx from "./index.module.scss";
 
 interface IProps {
-  images: string[];
+  screenshots: Screenshot[];
 }
 
-const Slider = ({ images }: IProps) => {
-  const [activeImg, setActiveImg] = useState(images[0]);
+const Slider = ({ screenshots }: IProps) => {
+  const [activeImg, setActiveImg] = useState(screenshots[0].id);
   return (
     <div className={cx.wrapper}>
-      {images.map((url) => (
+      {screenshots.map((screen) => (
         <div
-          key={url}
+          key={screen.id}
           className={classNames(
-            { [cx.active]: url === activeImg },
+            { [cx.active]: screen.id === activeImg },
             cx.imgWrapper
           )}
-          onClick={() => setActiveImg(url)}
+          onClick={() => setActiveImg(screen.id)}
         >
-          <img src={url} alt={"img"} />
+          <img src={screen.image} alt={"img"} />
         </div>
       ))}
     </div>
