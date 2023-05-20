@@ -1,12 +1,19 @@
-import { useNavigate } from "react-router-dom";
-
-import { IGameSmallItem } from "components/GamesSmallList/models";
 import Text from "components/common/Text";
+
+import { useRouter } from "hooks/useRouter";
+
+import { IGamesItemAPI } from "service/game/types";
 
 import cx from "./index.module.scss";
 
-const GameItem = ({ title, subTitle, img, num, id }: IGameSmallItem) => {
-  const navigate = useNavigate();
+const SmallCard = ({
+  title,
+  publisher,
+  thumbnail,
+  num,
+  id,
+}: IGamesItemAPI & { num: number }) => {
+  const { navigate } = useRouter();
 
   const goToGame = () => {
     navigate("/game/" + id);
@@ -16,14 +23,14 @@ const GameItem = ({ title, subTitle, img, num, id }: IGameSmallItem) => {
     <div className={cx.wrapper} onClick={goToGame}>
       <Text>{num}</Text>
       <div className={cx.imgWrapper}>
-        <img src={img} alt={"prev"} />
+        <img src={thumbnail} alt={"prev"} />
       </div>
       <div className={cx.text}>
         <Text>{title}</Text>
-        <Text size="thin">{subTitle}</Text>
+        <Text size="thin">{publisher}</Text>
       </div>
     </div>
   );
 };
 
-export default GameItem;
+export default SmallCard;

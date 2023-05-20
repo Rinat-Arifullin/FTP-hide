@@ -18,6 +18,7 @@ export const categoriesOptions: IOption[] = [
   { value: "zombie", label: "Zombie" },
   { value: "first-person", label: "First person" },
 ];
+
 export const platformsOptions: IOption[] = [
   { value: "pc", label: "PC" },
   { value: "browser", label: "Browser" },

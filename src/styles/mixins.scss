@@ -7,3 +7,21 @@
 @mixin randomBgr {
   background: rgb(random(100), random(100), random(100));
 }
+
+  @mixin fadeIn {
+  animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

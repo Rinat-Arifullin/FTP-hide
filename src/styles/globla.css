@@ -2,6 +2,7 @@
     --black: #010109;
     --primary: #7F4EFF;
     --success: #32E3AF;
+    --danger: #FF5C5C;
     --white: #FFFFFF;
     --gray: #27293A;
 }
@@ -11,6 +12,10 @@ body {
     color: white;
     margin: 0;
     padding: 0;
+}
+
+svg {
+    transition: .3s;
 }
 
 @font-face {

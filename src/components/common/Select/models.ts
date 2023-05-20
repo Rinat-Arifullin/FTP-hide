@@ -1,3 +1,5 @@
+import { ECategory, EPlatform, ESortBy } from "../../../service/game/types";
+
 export interface IOption {
   value: string;
   label: string;

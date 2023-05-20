@@ -1,26 +1,40 @@
 import MainLayout from "layouts/MainLayout";
-
 import Heading from "components/common/Heading";
 import CardList from "components/Main/CardList";
 
-import { ICardProps } from "components/Main/CardList/Card";
+import { gameApi } from "service/game/service";
+import { IFilters } from "service/game/types";
 
-const cardList: ICardProps[] = [];
-
-for (let i = 0; i < 20; i += 1) {
-  cardList.push({
-    id: i,
-    imgUrl: "https://www.freetogame.com/g/517/thumbnail.jpg",
-    title: "Lost Ark",
-    subTitle: "Amazon Games",
-  });
-}
+import { useEffect, useState } from "react";
+import { likedGameApi } from "service/likes/service";
 
 const Favorites = () => {
+  const [filters, setFilters] = useState<IFilters | null>(null);
+
+  const {
+    data: cardList,
+    isLoading,
+    error,
+    refetch,
+  } = likedGameApi.useFetchLikedGamesQuery();
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  if (error) {
+    console.log(error);
+    return <Heading>Error</Heading>;
+  }
+
   return (
     <MainLayout>
       <Heading>Favorites</Heading>
-      <CardList dataSource={cardList} />
+      <CardList
+        dataSource={cardList || []}
+        isLoading={isLoading}
+        withoutFilters
+      />
     </MainLayout>
   );
 };

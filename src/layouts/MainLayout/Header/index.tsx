@@ -1,16 +1,13 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter } from "hooks/useRouter";
 
 import Heading from "components/common/Heading";
-import Input from "components/common/Input";
 import Text from "components/common/Text";
-
-import ProfileSvg from "static/icons/Profile";
-import cx from "./index.module.scss";
 import Search from "./Search";
 
+import cx from "./index.module.scss";
+
 const Header = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { location, navigate } = useRouter();
 
   const toMainPage = () => {
     if (location.pathname !== "/") {
@@ -32,9 +29,6 @@ const Header = () => {
       <Search />
       <div className={cx.nav}>
         <Text onClick={toFavoritesPage}>Favorites</Text>
-        <div onClick={toProfilePage}>
-          <ProfileSvg />
-        </div>
       </div>
     </div>
   );

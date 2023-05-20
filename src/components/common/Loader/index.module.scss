@@ -1,0 +1,7 @@
+$padding: 2rem;
+
+.wrapper {
+  width: calc(100% - 2 * #{$padding});
+  padding: $padding;
+  text-align: center;
+}
